@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GPSLogger</string>
+    <string name="action_settings">Settings</string>
+    <string name="add">Добавить</string>
+    <string name="share">Поделиться</string>
+    <string name="save">Сохранить</string>
+    <string name="mapboxProjectID">micsha.p16i95kf</string>
+    <string name="accessToken">pk.eyJ1IjoibWljc2hhIiwiYSI6ImNpazB1NWs2YjAyd255MWtvdmZsZ2VhczAifQ.hqEjY6cc5pEmtVGio1g-eA</string>
+    <string name="find">Поиск</string>
+</resources>
