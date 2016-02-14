@@ -7,4 +7,6 @@
     <string name="mapboxProjectID">micsha.p16i95kf</string>
     <string name="accessToken">pk.eyJ1IjoibWljc2hhIiwiYSI6ImNpazB1NWs2YjAyd255MWtvdmZsZ2VhczAifQ.hqEjY6cc5pEmtVGio1g-eA</string>
     <string name="find">Поиск</string>
+    <string name="undo">Отменить шаг</string>
+    <string name="redo">Повторить шаг</string>
 </resources>

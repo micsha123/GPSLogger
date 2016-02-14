@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class MapFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
 
+        final SwitchCompat switchCompat = (SwitchCompat) rootView.findViewById(R.id.sw_gps);
         Button findButton = (Button) rootView.findViewById(R.id.btn_find);
         Button saveButton = (Button) rootView.findViewById(R.id.btn_save);
         mapView = (MapView) rootView.findViewById(R.id.mapview);
@@ -40,8 +42,6 @@ public class MapFragment extends Fragment {
 
         mapView.setCenter(new LatLng(56.477, 84.954));
         mapView.setZoom(13);
-
-//        mapView.setCenter(new LatLng(getLocation().getLatitude(), getLocation().getLongitude()));
 
         mapView.setMapViewListener(new MapViewListener() {
             @Override
@@ -72,7 +72,6 @@ public class MapFragment extends Fragment {
 
             @Override
             public void onLongPressMap(MapView pMapView, ILatLng pPosition) {
-
             }
         });
 
@@ -87,11 +86,22 @@ public class MapFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent returnIntent = new Intent();
-                if(userMarker != null){
-                    returnIntent.putExtra("location", userMarker.getPosition().toString());
-                    getActivity().setResult(Activity.RESULT_OK, returnIntent);
+                if(switchCompat.isChecked()){
+                    if(userMarker != null){
+                        returnIntent.putExtra("location", "http://www.osm.org/#map="
+                                + Float.toString(mapView.getZoomLevel()) + "/"
+                                + Float.toString((float) userMarker.getPosition().getLatitude())
+                                + "/" + Float.toString((float) userMarker.getPosition().getLongitude()));
+                        getActivity().setResult(Activity.RESULT_OK, returnIntent);
+                    } else {
+                        getActivity().setResult(Activity.RESULT_CANCELED);
+                    }
                 } else {
-                    getActivity().setResult(Activity.RESULT_CANCELED);
+                    returnIntent.putExtra("location", "http://www.osm.org/#map="
+                            + Float.toString(mapView.getZoomLevel()) + "/"
+                            + Float.toString((float) mapView.getCenter().getLatitude())
+                            + "/" + Float.toString((float) mapView.getCenter().getLongitude()));
+                    getActivity().setResult(Activity.RESULT_OK, returnIntent);
                 }
                 getActivity().finish();
             }
@@ -108,4 +118,5 @@ public class MapFragment extends Fragment {
             return null;
         }
     }
+
 }

@@ -6,6 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,8 +24,7 @@ import java.io.OutputStreamWriter;
 
 public class MainFragment extends Fragment {
 
-    private EditText editText;
-
+    EditText editText;
     public MainFragment() {
     }
 
@@ -52,7 +54,7 @@ public class MainFragment extends Fragment {
                     FileOutputStream out = new FileOutputStream(myFile);
                     OutputStreamWriter outWriter =
                             new OutputStreamWriter(out);
-                    outWriter.append(editText.getText());
+                    outWriter.append(editText.getText().toString());
                     outWriter.close();
                     out.close();
                     Toast.makeText(getActivity(), "Файл сформирован", Toast.LENGTH_SHORT).show();
@@ -74,6 +76,19 @@ public class MainFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 0 && resultCode == Activity.RESULT_OK) {
             editText.append(" " + data.getStringExtra("location"));
+
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        return super.onOptionsItemSelected(item);
     }
 }
